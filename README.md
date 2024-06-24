@@ -60,51 +60,44 @@ Polyhedra’s zkBridge is utilized for trustless cross-chain communication betwe
 
 ```mermaid
 graph TD
-    A(User locks BTC in Cobo Custody (MPC))
-    B(zk-SNARK Proof Generation)
-    C(zkBridge sends proof to Syscoin NEVM)
-    D(Syscoin NEVM verifies proof using light client)
-    E(Mint fBTC on Syscoin NEVM)
-    F(Lock fBTC in Eigenlayer Fork)
-    G(Delegate fBTC to AVS Solutions)
-    H(AVS Solutions provide security)
-    I(Mint stBTC derivatives)
-    J(Whitelist stBTC derivatives as collateral on Liquity V2 fork)
-    K(Lock stBTC derivatives as collateral in Liquity V2)
-    L(Mint USD Stablecoin)
+    A[User locks BTC in Cobo Custody MPC] -->|Generate| B[zk-SNARK Proof]
+    B -->|Send via| C[zkBridge to Syscoin NEVM]
+    C --> D[Syscoin NEVM verifies proof]
+    D -->|If valid| E[Mint fBTC on Syscoin NEVM]
+    E --> F[Lock fBTC in Eigenlayer Fork]
+    F --> G[Delegate fBTC to AVS Solutions]
+    G --> H[AVS Solutions provide security]
+    H --> I[Mint stBTC derivatives]
+    I --> J[Whitelist stBTC derivatives as collateral]
+    J --> K[Lock stBTC derivatives in Liquity V2 Fork]
+    K --> L[Mint USD Stablecoin]
 
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> H
-    H --> I
-    I --> J
-    J --> K
-    K --> L
-
-    subgraph zk-SNARK Process
+    subgraph "1. Cross-Chain Communication"
         A
         B
         C
         D
+        E
     end
 
-    subgraph Eigenlayer Process
-        E
+    subgraph "2. Enhancing Security"
         F
         G
         H
         I
     end
 
-    subgraph Liquity V2 Process
+    subgraph "3. Stablecoin Minting"
         J
         K
         L
     end
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style E fill:#bbf,stroke:#333,stroke-width:2px
+    style I fill:#bfb,stroke:#333,stroke-width:2px
+    style L fill:#ff9,stroke:#333,stroke-width:2px
+
 ```
 
 ### 3.2 Enhancing Security with Eigenlayer Fork
